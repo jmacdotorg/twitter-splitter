@@ -1,12 +1,12 @@
 # Twitter::Splitter
 
-This repository contains a command-line program (twittersplit) which uses an also-included Perl module (Twitter::Splitter) to split up a textfile into tweet-length lines. It appends pager-text to every line, in "( _page_ / _total-pages_ )" format.
+This repository contains a command-line program (twittersplit) which uses an also-included Perl module (Twitter::Splitter) to split up a textfile into tweet-length lines. Each line begins with a "pager" in the ad-hoc "( _page_ / _total-pages_ )" format.
 
-Command-line options allow you to specify that twittersplit should append the pager to the output lines, rather than prepend it, or that it should include additional text (such as a hashtag) in each. See __Usage__, below, for examples.
+Command-line options allow you to specify that twittersplit should append the pager to the output lines, rather than prepend it, or that it should squeeze a bit of additional text (such as a hashtag) into every line. See __Usage__, below, for examples.
 
-In any event, each line, including the pager and the optional hashtag, will be 140 characters or fewer in length. The program understands two or more newlines in the source file as a paragraph break, which it will respect in the output.
+The program understands two or more newlines in the source file as a paragraph break, which it will respect in the output as an early line-end.
 
-Actually posting these output lines to Twitter is left as an exercise for the hacker.
+In any event, each line, including the pager and the optional hashtag, will be 140 characters or fewer in length. Actually posting these output lines to Twitter is left as an exercise for the hacker.
 
 ## Installation
 
