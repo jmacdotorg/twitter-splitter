@@ -2,11 +2,11 @@
 
 This repository contains a command-line program (twittersplit) which uses an also-included Perl module (Twitter::Splitter) to split up a textfile into tweet-length lines. It appends pager-text to every line, in "( _page_ / _total-pages_ )" format.
 
-Command-line options allow you to specify that twittersplit should append the pager to the line, rather than prepend it, or that it should include additional text (such as a hashtag) to each.
+Command-line options allow you to specify that twittersplit should append the pager to the output lines, rather than prepend it, or that it should include additional text (such as a hashtag) in each. See __Usage__, below, for examples.
 
-In any event, each line, including the pager and the optional hashtag, will be 140 characters or fewer in length. 
+In any event, each line, including the pager and the optional hashtag, will be 140 characters or fewer in length. The program understands two or more newlines in the source file as a paragraph break, which it will respect in the output.
 
-Actually posting these lines to Twitter is left as an exercise for the hacker.
+Actually posting these output lines to Twitter is left as an exercise for the hacker.
 
 ## Installation
 
@@ -18,7 +18,7 @@ To install the Perl module's dependencies, run this while in the same directory 
 
 ## Usage
 
-Splitting the Gettysburg Address into tweets, variously:
+Splitting the [Gettysburg Address](https://en.wikipedia.org/wiki/Gettysburg_Address) into tweets, variously:
 
     $ twittersplit gettysburg.txt
 
@@ -54,7 +54,7 @@ Splitting the Gettysburg Address into tweets, variously:
 
 * The program only works with textfiles using Unix-style newlines (LF), at present.
 
-* Nothing is documented or test-covered at this time, oh dear.
+* Beyond this README, nothing here is documented or test-covered at this time, oh dear.
 
 ## Author
 
