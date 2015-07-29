@@ -1,0 +1,32 @@
+#!/usr/bin/env perl
+
+use warnings;
+use strict;
+use IO::File;
+use Getopt::Long;
+
+use FindBin;
+use lib "$FindBin::Bin/../lib";
+
+use Twitter::Splitter;
+
+my %args;
+GetOptions( \%args, 'append-pager', 'hashtag=s', );
+$args{ 'append_pager' } = $args{ 'append-pager' };
+
+my ($file_path) = @ARGV;
+die "Usage: $0 /path/to/source.txt\n" unless $file_path;
+
+my $source_fh = IO::File->new;
+$source_fh->open( "< $file_path" )
+    or die "ERROR: Couldn't read $file_path: $!\n";
+
+
+my $splitter = Twitter::Splitter->new(
+    source_fh    => $source_fh,
+    %args,
+);
+
+foreach ( $splitter->all_tweets ) {
+    print "$_\n";
+}
