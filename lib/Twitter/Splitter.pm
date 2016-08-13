@@ -26,7 +26,7 @@ has 'append_pager' => (
 
 has 'hashtag' => (
     isa => 'Str',
-    is => 'ro',
+    is => 'rw',
     default => '',
 );
 
@@ -50,6 +50,8 @@ sub _build_tweets {
     my $longest_tweet_count_length = 0;
 
     my @tweets;
+
+    $self->_clean_hashtag;
 
     until ( $source_fh->eof ) {
         my $tweet = '';
@@ -129,6 +131,19 @@ sub _build_tweets {
     }
 
     return \@tweets;
+}
+
+sub _clean_hashtag {
+    my $self = shift;
+
+    my $hashtag = $self->hashtag;
+
+    $hashtag =~ s/^\s+//g;
+    if ( $hashtag && ( $hashtag =~ /^[^#]/ ) ) {
+        $hashtag = q{#} . $hashtag;
+    }
+
+    $self->hashtag( $hashtag );
 }
 
 sub read_word {
