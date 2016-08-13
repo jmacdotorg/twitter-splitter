@@ -56,7 +56,7 @@ sub _build_tweets {
     until ( $source_fh->eof ) {
         my $tweet = '';
         if ( length (scalar @tweets) > $longest_tweet_count_length ) {
-            # Dang! Start all over.
+            # Dang! Start all over, increasing the pager's length by one character.
             @tweets = ();
             $word = '';
             $longest_tweet_count_length++;
