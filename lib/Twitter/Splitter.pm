@@ -12,6 +12,12 @@ has 'source_fh' => (
     is       => 'ro',
 );
 
+has 'include_pager' => (
+    isa => 'Bool',
+    is => 'ro',
+    default => 1,
+);
+
 has 'append_pager' => (
     isa => 'Bool',
     is => 'ro',
@@ -98,7 +104,14 @@ sub _build_tweets {
     my $tweet_count = scalar @tweets;
     for ( my $index = 0; $index <= $#tweets; $index++ ) {
         my $tweet_number = $index + 1;
-        my $pager = "($tweet_number/$tweet_count)";
+        my $pager;
+        if ( $self->include_pager ) {
+            $pager = "($tweet_number/$tweet_count)";
+        }
+        else {
+            $pager = q{};
+        }
+
         if ( $self->append_pager ) {
             my $hashtag = $self->hashtag
                           ? q{ } . $self->hashtag
