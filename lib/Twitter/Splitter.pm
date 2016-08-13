@@ -2,6 +2,7 @@ package Twitter::Splitter;
 
 use Moose;
 use Readonly;
+use Encode;
 Readonly my $MAX_TWEET_LENGTH => 140;
 
 use Fcntl qw( :seek );
@@ -164,7 +165,8 @@ sub read_word {
                     $word .= $letter;
                 }
                 else {
-                    $self->source_fh->seek( -1, SEEK_CUR );
+                    my $rewind_bytes = length(Encode::encode_utf8( $letter ) );
+                    $self->source_fh->seek( 0 - $rewind_bytes, SEEK_CUR );
                     last;
                 }
             }
