@@ -3,7 +3,7 @@ package Twitter::Splitter;
 use Moose;
 use Readonly;
 use Encode;
-Readonly my $MAX_TWEET_LENGTH => 140;
+Readonly my $MAX_TWEET_LENGTH => 280;
 
 use Fcntl qw( :seek );
 
@@ -29,6 +29,12 @@ has 'hashtag' => (
     isa => 'Str',
     is => 'rw',
     default => '',
+);
+
+has 'tweet_length' => (
+    isa => 'Num',
+    is => 'ro',
+    default => $MAX_TWEET_LENGTH,
 );
 
 has 'tweets' => (
@@ -85,7 +91,7 @@ sub _build_tweets {
                 + length( scalar @tweets + 1 )
                 + ($self->hashtag? length( $self->hashtag ) + 1 : 0)
                 + $longest_tweet_count_length
-                <= $MAX_TWEET_LENGTH
+                <= $self->tweet_length
             ) {
                 $tweet .= $word;
                 $word = '';

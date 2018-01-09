@@ -20,7 +20,25 @@ To install the Perl module's dependencies, run this while in the same directory 
 
 Splitting the [Gettysburg Address](https://en.wikipedia.org/wiki/Gettysburg_Address) into tweets, variously:
 
+**Default behavior**
+
     $ twittersplit gettysburg.txt
+
+> (1/7) Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in liberty, and dedicated to the proposition that all men are created equal.
+
+> (2/7) Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battlefield of that war. We have come to dedicate a portion of that field, as a final resting place for those who here
+
+> (3/7) gave their lives that that nation might live. It is altogether fitting and proper that we should do this.
+
+> [ ... ]
+
+> (7/7) government of the people, by the people, for the people, shall not perish from the earth.
+
+----
+
+**Classic-tweet-length tweets**
+
+    $ twittersplit --tweet-length=140 gettysburg.txt
 
 >(1/12) Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in liberty, and dedicated to the
 
@@ -32,7 +50,9 @@ Splitting the [Gettysburg Address](https://en.wikipedia.org/wiki/Gettysburg_Addr
 
 ----
 
-    $ twittersplit --append-pager gettysburg.txt 
+**Append the pager, rather than prepend it**
+
+    $ twittersplit --append-pager --tweet-length=140 gettysburg.txt 
 
 >Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in liberty, and dedicated to the (1/12)
 
@@ -42,13 +62,15 @@ Splitting the [Gettysburg Address](https://en.wikipedia.org/wiki/Gettysburg_Addr
 
 ----
 
+**Add a hashtag to every generated tweet**
+
     $ twittersplit --append-pager --hashtag=#AmericanCivilWar gettysburg.txt
 
 >Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in liberty, and (1/14) #AmericanCivilWar
 
 >dedicated to the proposition that all men are created equal. (2/14) #AmericanCivilWar
 
-> [ ... ] 
+> [ ... ]
 
 ## Bugs and such
 

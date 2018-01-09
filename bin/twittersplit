@@ -11,8 +11,12 @@ use lib "$FindBin::Bin/../lib";
 use Twitter::Splitter;
 
 my %args;
-GetOptions( \%args, 'append-pager', 'hashtag=s', );
-$args{ 'append_pager' } = $args{ 'append-pager' };
+GetOptions( \%args, 'append-pager', 'hashtag=s', 'tweet-length=i', );
+foreach (keys %args) {
+    my $value = $args{$_};
+    s/-/_/g;
+    $args{$_} = $value;
+}
 
 my ($file_path) = @ARGV;
 die "Usage: $0 /path/to/source.txt\n" unless $file_path;
